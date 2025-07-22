@@ -11,7 +11,6 @@
     zsh-autosuggestions
     zsh-syntax-highlighting
     inputs.zen-browser.packages.${pkgs.system}.default
-    # Add these for Hyprland functionality
     kitty          # Terminal emulator
     wofi           # Application launcher
     waybar         # Status bar
@@ -96,6 +95,7 @@
         "$mod, R, exec, wofi --show drun"
         "$mod, P, pseudo,"
         "$mod, J, togglesplit,"
+        "$mod, B, exec, zen-browser"
         
         # Move focus
         "$mod, left, movefocus, l"
