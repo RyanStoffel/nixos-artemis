@@ -10,9 +10,33 @@
   };
 
   outputs = { nixpkgs, home-manager, ... }:
+    
     let
       system = "x86_64-linux";
     in {
+      
+      homeConfigurations.rstoffel = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${system};
+        modules = [
+          {
+            home.username = "rstoffel";
+            home.homeDirectory = "/home/rstoffel";
+            home.stateVersion = "23.11";
+
+            home.packages = with nixpkgs.legacyPackages.${system}; [
+              zsh
+              zip
+              unzip
+              zsh-autosuggestions
+              zsh-syntax-highlighting
+            ];
+
+            programs.starship.enable = true;
+            programs.home-manager.enable = true;
+          }
+        ];
+      };
+
       nixosConfigurations.rstoffel = nixpkgs.lib.nixosSystem {
         inherit system;
 

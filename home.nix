@@ -9,6 +9,8 @@
     zsh
     zip
     unzip
+    zsh-autosuggestions
+    zsh-syntax-highlighting
   ];
   
   programs.starship.enable = true;
