@@ -1,5 +1,4 @@
-
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   home.username = "rstoffel";
@@ -11,6 +10,7 @@
     unzip
     zsh-autosuggestions
     zsh-syntax-highlighting
+    inputs.zen-browser.packages.${pkgs.system}.default
   ];
   
   programs.starship.enable = true;

@@ -22,4 +22,6 @@
   zsh
   ghostty
   fastfetch
+  _1password-gui
+  _1password
 ]

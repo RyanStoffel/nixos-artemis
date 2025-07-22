@@ -7,9 +7,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    zen-browser.url = "github:youwen5/zen-browser-flake";
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, home-manager, zen-browser, ... }@inputs:
     
     let
       system = "x86_64-linux";
@@ -37,7 +38,7 @@
         ];
       };
 
-      nixosConfigurations.rstoffel = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.Artemis = nixpkgs.lib.nixosSystem {
         inherit system;
 
         modules = [
@@ -49,12 +50,12 @@
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "hm-bak";
             home-manager.users.rstoffel = import ./home.nix;
+            home-manager.extraSpecialArgs = { inherit inputs; };
           }
         ];
 
         specialArgs = {
-          inherit system;
-          inputs = { inherit nixpkgs home-manager; };
+          inherit inputs system;
         };
       };
     };

@@ -1,5 +1,4 @@
-# ~/nixos/configuration.nix
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports = [
@@ -15,8 +14,25 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
+
+  # Allow unfree packages (needed for 1Password)
+  nixpkgs.config.allowUnfree = true;
+
+  # Graphics support
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+
+  # Additional packages to help with browser compatibility
+  environment.systemPackages = (import ./packages.nix { inherit pkgs inputs; }) ++ (with pkgs; [
+    gvfs
+    glib
+    gtk3
+    dbus
+  ]);
 
   services.pipewire = {
     enable = true;
@@ -35,9 +51,15 @@
   
   programs.firefox.enable = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  # 1Password integration
+  programs._1password.enable = true;
+  programs._1password-gui = {
+    enable = true;
+    # Polkit integration for biometric unlock
+    polkitPolicyOwners = [ "rstoffel" ];
+  };
 
-  environment.systemPackages = import ./packages.nix { inherit pkgs; };
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   services.openssh.enable = true;
 
