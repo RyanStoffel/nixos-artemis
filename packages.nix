@@ -19,4 +19,5 @@
   stow
   gnome-session
   xclip
+  zsh
 ]
