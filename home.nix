@@ -87,7 +87,7 @@
       
       bind = [
         # Program launches
-        "$mod, T, exec, ghostty"
+        "$mod, T, exec, kitty"
         "$mod, Q, killactive,"
         "$mod, M, exit,"
         "$mod, E, exec, nautilus"
