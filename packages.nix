@@ -21,4 +21,5 @@
   xclip
   zsh
   ghostty
+  fastfetch
 ]

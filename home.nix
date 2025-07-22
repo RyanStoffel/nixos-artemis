@@ -10,13 +10,7 @@
     zip
     unzip
   ];
-
-  programs.zsh = {
-    enable = true;
-    enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
-  };
-
+  
   programs.starship.enable = true;
 
   home.stateVersion = "23.11";
