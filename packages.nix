@@ -20,4 +20,5 @@
   gnome-session
   xclip
   zsh
+  ghostty
 ]

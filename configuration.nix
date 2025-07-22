@@ -23,12 +23,16 @@
     pulse.enable = true;
   };
 
+  programs.zsh.enable = true;
+
   users.users.rstoffel = {
+    shell = pkgs.zsh;
     isNormalUser = true;
     extraGroups = [ "wheel" ];
     packages = with pkgs; [ tree ];
   };
 
+  
   programs.firefox.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
