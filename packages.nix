@@ -23,5 +23,10 @@
   ghostty
   fastfetch
   _1password-gui
-  _1password
+  _1password-cli
+  spotify
+  slack
+  obsidian
+  vscode
+  postman
 ]
