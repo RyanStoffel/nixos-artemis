@@ -8,6 +8,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zen-browser.url = "github:youwen5/zen-browser-flake";
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs = { nixpkgs, home-manager, zen-browser, ... }@inputs:

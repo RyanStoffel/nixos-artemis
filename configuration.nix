@@ -17,6 +17,9 @@
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
+  programs.hyprland.enable = true;
+  programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+
   # Allow unfree packages (needed for 1Password)
   nixpkgs.config.allowUnfree = true;
 

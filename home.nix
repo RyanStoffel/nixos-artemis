@@ -15,6 +15,13 @@
   
   programs.starship.enable = true;
 
+  wayland.windowManager.hyprland = {
+    enable = true;
+    settings = {
+
+    };
+  };
+
   home.stateVersion = "23.11";
   programs.home-manager.enable = true;
 }
