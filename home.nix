@@ -95,7 +95,7 @@
         "$mod, R, exec, wofi --show drun"
         "$mod, P, pseudo,"
         "$mod, J, togglesplit,"
-        "$mod, B, exec, zen-browser"
+        "$mod, B, exec, firefox"
         
         # Move focus
         "$mod, left, movefocus, l"
