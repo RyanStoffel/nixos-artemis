@@ -96,7 +96,7 @@
         "$mod, R, exec, wofi --show drun"
         "$mod, P, pseudo,"
         "$mod, J, togglesplit,"
-        "$mod, B, exec, firefox"
+        "$mod, B, exec, /etc/profiles/per-user/rstoffel/bin/zen"
         
         # Move focus
         "$mod, left, movefocus, l"
