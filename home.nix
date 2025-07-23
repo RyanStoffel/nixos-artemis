@@ -16,6 +16,7 @@
     waybar         # Status bar
     dunst          # Notification daemon
     wl-clipboard   # Wayland clipboard utilities
+    firefox
   ];
   
   programs.starship.enable = true;
