@@ -31,9 +31,7 @@
   vscode
   postman
   zulu8
-  variety
-  komorebi
-  hydrapaper
+  swww
 
   # Language Servers for your Neovim setup
   typescript-language-server      # JavaScript/TypeScript/React/Next.js
