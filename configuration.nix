@@ -1,5 +1,9 @@
 { config, lib, pkgs, inputs, ... }:
 
+let
+  # Import the Salesforce CLI FHS environment
+  sfdx-env = import ./sfdx-fhs.nix { inherit pkgs; };
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -29,13 +33,38 @@
     enable32Bit = true;
   };
 
-  # Additional packages to help with browser compatibility
-  environment.systemPackages = (import ./packages.nix { inherit pkgs inputs; }) ++ (with pkgs; [
-    gvfs
-    glib
-    gtk3
-    dbus
-  ]);
+  # Docker support for Salesforce CLI alternative
+  virtualisation.docker.enable = true;
+
+  # Additional packages to help with browser compatibility + Language servers + SFDX
+  environment.systemPackages = (import ./packages.nix { inherit pkgs inputs; }) ++ [
+    # Existing packages
+    pkgs.gvfs
+    pkgs.glib
+    pkgs.gtk3
+    pkgs.dbus
+    
+    # Salesforce CLI FHS environment
+    sfdx-env.sfdx-fhs
+    sfdx-env.sfdx-wrapper
+    sfdx-env.sf-wrapper
+    sfdx-env.salesforce-cli
+  ];
+
+  # Set up environment variables for development
+  environment.variables = {
+    # Java environment for LSP servers
+    JAVA_HOME = "${pkgs.jdk21}/lib/openjdk";
+    
+    # Node.js for language servers
+    NODE_PATH = "${pkgs.nodejs_22}/lib/node_modules";
+    
+    # Python for LSP
+    PYTHONPATH = "${pkgs.python313}/lib/python3.13/site-packages";
+  };
+
+  # Add development users to docker group
+  users.groups.docker.members = [ "rstoffel" ];
 
   services.pipewire = {
     enable = true;
@@ -47,11 +76,10 @@
   users.users.rstoffel = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "docker" ];  # Added docker group
     packages = with pkgs; [ tree ];
   };
 
-  
   programs.firefox.enable = true;
 
   # 1Password integration
