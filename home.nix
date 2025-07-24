@@ -17,6 +17,7 @@
     dunst          # Notification daemon
     wl-clipboard   # Wayland clipboard utilities
     firefox
+    swww
   ];
   
   programs.starship.enable = true;
@@ -147,6 +148,7 @@
       exec-once = [
         "waybar"
         "dunst"
+        "swww-daemon && sleep 1 && swww img ~/Pictures/wallpaper2.jpg"
       ];
     };
   };
