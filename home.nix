@@ -93,7 +93,7 @@
         "$mod, M, exit,"
         "$mod, E, exec, nautilus"
         "$mod, V, togglefloating,"
-        "$mod, R, exec, wofi --show drun"
+        "$mod, space, exec, wofi --show drun"
         "$mod, P, pseudo,"
         "$mod, J, togglesplit,"
         "$mod, B, exec, /etc/profiles/per-user/rstoffel/bin/zen"
