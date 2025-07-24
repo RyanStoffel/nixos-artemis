@@ -80,6 +80,7 @@ in
     packages = with pkgs; [ tree ];
   };
 
+  programs.steam.enable = true;
   programs.firefox.enable = true;
 
   # 1Password integration
