@@ -30,6 +30,7 @@
   obsidian
   vscode
   postman
+  zulu8
 
   # Language Servers for your Neovim setup
   typescript-language-server      # JavaScript/TypeScript/React/Next.js
