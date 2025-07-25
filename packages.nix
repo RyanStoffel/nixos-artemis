@@ -1,5 +1,5 @@
 { pkgs, ... }: with pkgs; [
-  # Existing packages
+  # dev
   vim
   wget
   neovim
@@ -18,44 +18,39 @@
   starship
   ripgrep
   stow
-  gnome-session
-  xclip
   zsh
-  ghostty
+  vscode
+  postman
+  zulu8
+  fd
+  docker
+  docker-compose
+  
+  # apps
+  xclip
   fastfetch
   _1password-gui
   _1password-cli
   spotify
   slack
   obsidian
-  vscode
-  postman
-  zulu8
   swww
-
-  # Language Servers for your Neovim setup
-  typescript-language-server      # JavaScript/TypeScript/React/Next.js
-  nodePackages.typescript        # TypeScript compiler
-  vscode-langservers-extracted    # HTML, CSS, JSON, ESLint language servers
-  tailwindcss-language-server     # Tailwind CSS
-  clang-tools                     # C/C++ (includes clangd)
-  python313Packages.python-lsp-server  # Python LSP
-  nodePackages.bash-language-server     # Shell scripts
-  sqls                           # SQL language server
-  omnisharp-roslyn               # C# language server
-  jdt-language-server            # Java language server
+  networkmanagerapplet
   
-  # Formatters and Linters
-  black                          # Python formatter
-  shfmt                          # Shell script formatter  
-  nodePackages.prettier         # JS/TS/HTML/CSS formatter
-  nodePackages.eslint           # JavaScript linter
-  
-  # Development tools
-  tree-sitter                    # Better syntax highlighting
-  fd                             # Better find command
-  
-  # Docker support (for Salesforce CLI if needed)
-  docker
-  docker-compose
+  # lsp servers
+  typescript-language-server
+  nodePackages.typescript
+  vscode-langservers-extracted
+  tailwindcss-language-server
+  clang-tools
+  python313Packages.python-lsp-server
+  nodePackages.bash-language-server
+  sqls
+  omnisharp-roslyn
+  jdt-language-server
+  black
+  shfmt
+  nodePackages.prettier
+  nodePackages.eslint
+  tree-sitter
 ]

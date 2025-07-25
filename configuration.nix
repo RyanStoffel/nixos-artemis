@@ -1,103 +1,89 @@
 { config, lib, pkgs, inputs, ... }:
-
 let
-  # Import the Salesforce CLI FHS environment
+  # import sfdx-fhs.nix - this allows me to use the sf cli
   sfdx-env = import ./sfdx-fhs.nix { inherit pkgs; };
 in
 {
+  # import hardware configuration
   imports = [
     ./hardware-configuration.nix
   ];
 
+  # boot configuration
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "Artemis";
+  # networking
+  networking.hostName = "artemis";
   networking.networkmanager.enable = true;
 
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  services.xserver.enable = true;
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
-
-  programs.hyprland.enable = true;
-  programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
-
-  # Allow unfree packages (needed for 1Password)
-  nixpkgs.config.allowUnfree = true;
-
-  # Graphics support
+  # hardware
+  hardware.enableAllFirmware = true;
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
   };
 
-  # Docker support for Salesforce CLI alternative
-  virtualisation.docker.enable = true;
+  # localization
+  i18n.defaultLocale = "en_US.UTF-8";
 
-  # Additional packages to help with browser compatibility + Language servers + SFDX
+  # display and window manager
+  services.xserver.enable = true;
+  services.displayManager.gdm.enable = true;
+  programs.hyprland.enable = true;
+  programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+
+  # audio
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+  };
+
+  # fonts
+  fonts.packages = [
+    pkgs.nerd-fonts.jetbrains-mono
+  ];
+
+  # allow unfree packages (needed for 1password)
+  nixpkgs.config.allowUnfree = true;
+
+  # system packages
   environment.systemPackages = (import ./packages.nix { inherit pkgs inputs; }) ++ [
-    # Existing packages
+    # additional packages for browser compatibility + language servers + sfdx
     pkgs.gvfs
     pkgs.glib
     pkgs.gtk3
     pkgs.dbus
-    
-    # Salesforce CLI FHS environment
     sfdx-env.sfdx-fhs
     sfdx-env.sfdx-wrapper
     sfdx-env.sf-wrapper
     sfdx-env.salesforce-cli
   ];
 
-  # Set up environment variables for development
-  environment.variables = {
-    # Java environment for LSP servers
-    JAVA_HOME = "${pkgs.jdk21}/lib/openjdk";
-    
-    # Node.js for language servers
-    NODE_PATH = "${pkgs.nodejs_22}/lib/node_modules";
-    
-    # Python for LSP
-    PYTHONPATH = "${pkgs.python313}/lib/python3.13/site-packages";
-  };
-
-  # Add development users to docker group
-  users.groups.docker.members = [ "rstoffel" ];
-
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-  };
-
-  fonts.packages = [
-    pkgs.nerd-fonts.jetbrains-mono
-  ];
-
+  # programs
   programs.zsh.enable = true;
-
-  users.users.rstoffel = {
-    shell = pkgs.zsh;
-    isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ];  # Added docker group
-    packages = with pkgs; [ tree ];
-  };
-
   programs.steam.enable = true;
   programs.firefox.enable = true;
-
-  # 1Password integration
   programs._1password.enable = true;
   programs._1password-gui = {
     enable = true;
-    # Polkit integration for biometric unlock
     polkitPolicyOwners = [ "rstoffel" ];
   };
 
+  # user configuration
+  users.users.rstoffel = {
+    shell = pkgs.zsh;
+    isNormalUser = true;
+    extraGroups = [ "wheel" ];
+    packages = with pkgs; [ tree ];
+  };
+
+  # nix settings
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # services
   services.openssh.enable = true;
 
+  # system version
   system.stateVersion = "25.05";
 }

@@ -1,34 +1,44 @@
 { config, pkgs, inputs, ... }:
-
 {
+  # user settings
   home.username = "rstoffel";
   home.homeDirectory = "/home/rstoffel";
+  home.stateVersion = "23.11";
 
+  # packages
   home.packages = with pkgs; [
+    # shell
     zsh
-    zip
-    unzip
     zsh-autosuggestions
     zsh-syntax-highlighting
+    
+    # utilities
+    zip
+    unzip
+    wl-clipboard
+    
+    # applications
     inputs.zen-browser.packages.${pkgs.system}.default
-    kitty          # Terminal emulator
-    wofi           # Application launcher
-    waybar         # Status bar
-    dunst          # Notification daemon
-    wl-clipboard   # Wayland clipboard utilities
+    kitty
+    wofi
+    waybar
+    dunst
     firefox
     swww
   ];
-  
-  programs.starship.enable = true;
 
+  # programs
+  programs.starship.enable = true;
+  programs.home-manager.enable = true;
+
+  # hyprland window manager
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
-      # Monitor configuration
+      # monitor configuration
       monitor = ",preferred,auto,auto";
       
-      # Input configuration
+      # input configuration
       input = {
         kb_layout = "us";
         follow_mouse = 1;
@@ -38,7 +48,7 @@
         sensitivity = 0;
       };
       
-      # General configuration
+      # general configuration
       general = {
         gaps_in = 5;
         gaps_out = 20;
@@ -49,7 +59,7 @@
         allow_tearing = false;
       };
       
-      # Decoration
+      # decoration
       decoration = {
         rounding = 10;
         blur = {
@@ -59,7 +69,7 @@
         };
       };
       
-      # Animations
+      # animations
       animations = {
         enabled = true;
         bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
@@ -73,22 +83,22 @@
         ];
       };
       
-      # Layout
+      # layout configuration
       dwindle = {
         pseudotile = true;
         preserve_split = true;
       };
       
-      # Window rules
+      # window rules
       windowrulev2 = [
         "suppressevent maximize, class:.*"
       ];
       
-      # Key bindings
+      # key bindings
       "$mod" = "SUPER";
       
       bind = [
-        # Program launches
+        # program launches
         "$mod, T, exec, kitty"
         "$mod, Q, killactive,"
         "$mod, M, exit,"
@@ -99,13 +109,13 @@
         "$mod, J, togglesplit,"
         "$mod, B, exec, /etc/profiles/per-user/rstoffel/bin/zen"
         
-        # Move focus
+        # move focus
         "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"
         "$mod, up, movefocus, u"
         "$mod, down, movefocus, d"
         
-        # Switch workspaces
+        # switch workspaces
         "$mod, 1, workspace, 1"
         "$mod, 2, workspace, 2"
         "$mod, 3, workspace, 3"
@@ -117,7 +127,7 @@
         "$mod, 9, workspace, 9"
         "$mod, 0, workspace, 10"
         
-        # Move active window to workspace
+        # move active window to workspace
         "$mod SHIFT, 1, movetoworkspace, 1"
         "$mod SHIFT, 2, movetoworkspace, 2"
         "$mod SHIFT, 3, movetoworkspace, 3"
@@ -129,22 +139,22 @@
         "$mod SHIFT, 9, movetoworkspace, 9"
         "$mod SHIFT, 0, movetoworkspace, 10"
         
-        # Special workspace (scratchpad)
+        # special workspace (scratchpad)
         "$mod, S, togglespecialworkspace, magic"
         "$mod SHIFT, S, movetoworkspace, special:magic"
         
-        # Scroll through existing workspaces
+        # scroll through existing workspaces
         "$mod, mouse_down, workspace, e+1"
         "$mod, mouse_up, workspace, e-1"
       ];
       
-      # Mouse bindings
+      # mouse bindings
       bindm = [
         "$mod, mouse:272, movewindow"
         "$mod, mouse:273, resizewindow"
       ];
       
-      # Startup applications
+      # startup applications
       exec-once = [
         "waybar"
         "dunst"
@@ -152,7 +162,4 @@
       ];
     };
   };
-
-  home.stateVersion = "23.11";
-  programs.home-manager.enable = true;
 }
