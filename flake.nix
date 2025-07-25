@@ -43,7 +43,7 @@
     };
 
     # nixos system configuration
-    nixosConfigurations.artemis = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.Artemis = nixpkgs.lib.nixosSystem {
       inherit system;
       
       # system modules
