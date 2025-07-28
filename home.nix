@@ -261,12 +261,8 @@
         "dunst &"
         "swww-daemon &"
         "sleep 2 && swww img ~/Pictures/wallpaper2.jpg &"
-        "1password --silent &"
         "nm-applet &"
         "blueman-applet &"
-        "spotify &"
-        "discord &"
-        "slack &"
       ];
     };
   };
