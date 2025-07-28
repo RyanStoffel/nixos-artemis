@@ -36,6 +36,11 @@
   programs.starship.enable = true;
   programs.home-manager.enable = true;
 
+  # Explicitly disable waybar and wofi program management
+  # This prevents Home Manager from creating config symlinks
+  programs.waybar.enable = false;
+  programs.wofi.enable = false;
+
   # gtk theme
   gtk = {
     enable = true;
