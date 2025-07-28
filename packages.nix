@@ -50,6 +50,7 @@
   obsidian
   _1password-gui
   _1password-cli
+  nautilus
   
   # media
   spotify
