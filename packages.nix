@@ -58,6 +58,7 @@
   
   # gaming
   steam
+  minecraft
   
   # mail client
   thunderbird
