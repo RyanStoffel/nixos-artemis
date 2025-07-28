@@ -59,7 +59,7 @@
     enable = true;
     settings = {
       # monitor configuration
-      monitor = "DP-2,preferred,auto,auto";
+      monitor = "DP-2,3440x1440@180,0x0,1";
       
       # input configuration
       input = {
