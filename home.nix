@@ -36,7 +36,8 @@
     enable = true;
     settings = {
       # monitor configuration
-      monitor = ",preferred,auto,auto";
+      # monitor = ",preferred,auto,auto";
+      monitor = "DP-2,preferred,auto,auto";
       
       # input configuration
       input = {

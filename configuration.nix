@@ -28,8 +28,10 @@ in
   i18n.defaultLocale = "en_US.UTF-8";
 
   # display and window manager
+  services.desktopManager.plasma6.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
   services.xserver.enable = true;
-  services.displayManager.gdm.enable = true;
   programs.hyprland.enable = true;
   programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
 
