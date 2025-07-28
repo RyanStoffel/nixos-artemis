@@ -1,17 +1,12 @@
-{ pkgs, ... }: with pkgs; [
-  # dev
+{ pkgs, inputs, ... }: with pkgs; [
+  # dev tools
   vim
-  wget
   neovim
   git
   gh
-  jdk21
-  python313
-  python313Packages.pip
-  nodejs_22
   curl
+  wget
   htop
-  eslint
   zoxide
   fzf
   bat
@@ -19,38 +14,86 @@
   ripgrep
   stow
   zsh
-  vscode
-  postman
-  zulu8
   fd
   docker
   docker-compose
   
-  # apps
-  xclip
-  fastfetch
+  # programming languages & runtimes
+  jdk21
+  python313
+  python313Packages.pip
+  nodejs_22
+  zulu8
+  
+  # code editors & IDEs
+  vscode
+  zed-editor
+  
+  # development tools
+  postman
+  
+  # browsers
+  firefox
+  firefox-devedition
+  google-chrome
+  inputs.zen-browser.packages.${pkgs.system}.default
+  
+  # terminals
+  kitty
+  alacritty
+  
+  # communication
+  slack
+  discord
+  
+  # productivity
+  obsidian
   _1password-gui
   _1password-cli
+  
+  # media
   spotify
-  slack
-  obsidian
-  swww
+  vlc
+  
+  # gaming
+  steam
+  
+  # mail client
+  thunderbird
+  
+  # system utilities
+  xclip
+  wl-clipboard
+  fastfetch
   networkmanagerapplet
+  pavucontrol
+  blueman
+  
+  # wayland/hyprland specific
+  swww
+  wofi
+  waybar
+  dunst
+  
+  # KDE utilities (since you liked the plasma taskbar style)
   kdePackages.kcalc
   kdePackages.kcharselect
-  kdePackages.kcolorchooser # A small utility to select a color
-  kdePackages.kolourpaint # Easy-to-use paint program
-  kdePackages.ksystemlog # KDE SystemLog Application
-  kdePackages.sddm-kcm # Configuration module for SDDM
-  kdiff3 # Compares and merges 2 or 3 files or directories
-  kdePackages.isoimagewriter # Optional: Program to write hybrid ISO files onto USB disks
-  kdePackages.partitionmanager # Optional Manage the disk devices, partitions and file systems on your computer
-  hardinfo2 # System information and benchmarks for Linux systems
-  haruna # Open source video player built with Qt/QML and libmpv
-  wayland-utils # Wayland utilities
-  wl-clipboard # Command-line copy/paste utilities for Wayland
+  kdePackages.kcolorchooser
+  kdePackages.kolourpaint
+  kdePackages.ksystemlog
+  kdePackages.sddm-kcm
+  kdiff3
+  kdePackages.isoimagewriter
+  kdePackages.partitionmanager
   
-  # lsp servers
+  # system info & monitoring
+  hardinfo2
+  haruna 
+  
+  # wayland utilities
+  wayland-utils
+  
+  # language servers & formatters
   typescript-language-server
   nodePackages.typescript
   vscode-langservers-extracted
@@ -65,5 +108,6 @@
   shfmt
   nodePackages.prettier
   nodePackages.eslint
+  eslint
   tree-sitter
 ]

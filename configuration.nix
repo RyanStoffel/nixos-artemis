@@ -24,6 +24,16 @@ in
     enable32Bit = true;
   };
 
+  # AMD GPU support
+  services.xserver.videoDrivers = [ "amdgpu" ];
+  hardware.graphics.extraPackages = with pkgs; [
+    amdvlk
+    rocmPackages.clr.icd
+  ];
+  hardware.graphics.extraPackages32 = with pkgs; [
+    driversi686Linux.amdvlk
+  ];
+
   # localization
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -39,15 +49,29 @@ in
   services.pipewire = {
     enable = true;
     pulse.enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
   };
+  
+  # bluetooth
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
   # fonts
   fonts.packages = [
     pkgs.nerd-fonts.jetbrains-mono
+    pkgs.nerd-fonts.fira-code
+    pkgs.nerd-fonts.hack
+    pkgs.noto-fonts
+    pkgs.noto-fonts-emoji
+    pkgs.font-awesome
   ];
 
-  # allow unfree packages (needed for 1password)
+  # allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  # flatpak support for apps not in nixpkgs
+  services.flatpak.enable = true;
 
   # system packages
   environment.systemPackages = (import ./packages.nix { inherit pkgs inputs; }) ++ [
@@ -71,12 +95,21 @@ in
     enable = true;
     polkitPolicyOwners = [ "rstoffel" ];
   };
+  
+  # AMD GPU control
+  programs.corectrl.enable = true;
+
+  # thunar file manager
+  programs.thunar.enable = true;
+  programs.xfconf.enable = true;
+  services.gvfs.enable = true;
+  services.tumbler.enable = true;
 
   # user configuration
   users.users.rstoffel = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "networkmanager" "audio" "video" ];
     packages = with pkgs; [ tree ];
   };
 
