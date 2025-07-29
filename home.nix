@@ -58,10 +58,19 @@
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
-      # monitor configuration
+      ################
+      ### MONITORS ###
+      ################
       monitor = "DP-2,3440x1440@180,0x0,1";
-      
-      # input configuration
+
+      ################
+      ### PROGRAMS ###
+      ################
+      "$terminal" = "kitty";
+      "$fileManager" = "thunar";
+      "$menu" = "wofi --show drun";
+        
+
       input = {
         kb_layout = "us";
         follow_mouse = 1;
@@ -73,8 +82,8 @@
       
       # general configuration
       general = {
-        gaps_in = 8;
-        gaps_out = 16;
+        gaps_in = 4;
+        gaps_out = 8;
         border_size = 2;
         "col.active_border" = "rgba(88c0d0ff) rgba(5e81acff) 45deg";
         "col.inactive_border" = "rgba(3b4252aa)";
@@ -84,7 +93,6 @@
       
       # decoration
       decoration = {
-        rounding = 12;
         blur = {
           enabled = true;
           size = 6;
