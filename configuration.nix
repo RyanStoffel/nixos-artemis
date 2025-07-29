@@ -74,6 +74,7 @@ in
   services.flatpak.enable = true;
 
   # system packages
+  nixpkgs.config.allowBroken = true;
   environment.systemPackages = (import ./packages.nix { inherit pkgs inputs; }) ++ [
     # additional packages for browser compatibility + language servers + sfdx
     pkgs.gvfs
